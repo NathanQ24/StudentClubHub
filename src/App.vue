@@ -1,4 +1,5 @@
 <template>
+<html>
   <head>
         <title>Student Club Hub</title>
         <link rel="stylesheet" href="styles.css">
@@ -38,6 +39,7 @@
             </div>
     </div>
     </body>
+</html>
 </template>
 
 <script>  
