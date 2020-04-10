@@ -1,17 +1,33 @@
 <template>
+  <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Acme Web Design</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+  <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+<body>
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">Register</div>
-          <div class="card-body">
-            <div v-if="error" class="alert alert-danger">{{error}}</div>
-            <form action="#" @submit.prevent="submit">
-              <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
-
-                <div class="col-md-6">
-                  <input
+    <h1 class="brand"><span>Sign Up</span></h1>
+    <div class="wrapper animated bounceInLeft">
+      <div class="company-info">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><i class="fa fa-road"></i> 2020 E Maple St, North Canton, OH 44720</li>
+          <li><i class="fa fa-phone"></i> (555) 555-5555</li>
+          <li><i class="fa fa-envelope"></i> walsh@walsh.edu</li>
+        </ul>
+      </div>
+      <div class="contact">
+        <h3>Sign Up for the Student Club Hub</h3>
+        <div v-if="error" class="alert alert-danger">{{error}}</div>
+        <form action="#" @submit.prevent="submit">
+          <p>
+            <label>Name</label>
+            <input
                     id="name"
                     type="name"
                     class="form-control"
@@ -21,14 +37,10 @@
                     autofocus
                     v-model="form.name"
                   />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
-
-                <div class="col-md-6">
-                  <input
+          </p>
+          <p>
+            <label>Email Address</label>
+            <input
                     id="email"
                     type="email"
                     class="form-control"
@@ -38,14 +50,10 @@
                     autofocus
                     v-model="form.email"
                   />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-
-                <div class="col-md-6">
-                  <input
+          </p>
+          <p>
+            <label>Password</label>
+            <input
                     id="password"
                     type="password"
                     class="form-control"
@@ -53,20 +61,33 @@
                     required
                     v-model="form.password"
                   />
-                </div>
-              </div>
-
-              <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4">
-                  <button type="submit" class="btn btn-primary">Register</button>
-                </div>
-              </div>
-            </form>
-          </div>
+          </p>
+          <p>
+            <label>Confirm Password</label>
+            <input type="password" name="confirmpassword">
+          </p>
+          <p>
+            <label>Major</label>
+            <select name="major">
+              <option value="1">Computer Science</option>
+              <option value="2">Business</option>
+              <option value="3">Nursing</option>
+              <option value="4">Graphic Design</option>
+            </select>
+          </p>
+          <p class="full">
+            <label>Message</label>
+            <textarea name="message" rows="5"></textarea>
+          </p>
+          <p class="full">
+            <button>Submit</button>
+          </p>
+        </form>
         </div>
       </div>
     </div>
-  </div>
+</body>
+</html>
 </template>
 
 
@@ -95,6 +116,7 @@ export default {
               displayName: this.form.name
             })
             .then(() => {});
+            this.$router.replace({ name: "Dashboard" });
         })
         .catch(err => {
           this.error = err.message;

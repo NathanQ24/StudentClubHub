@@ -6,15 +6,16 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
+// This connects
 const configOptions = {
-  apiKey: "AIzaSyA8UoGz4BGNYIB0hQlZP3GtLMO39IGX9X8",
-  authDomain: "auth-df504.firebaseapp.com",
-  databaseURL: "https://auth-df504.firebaseio.com",
-  projectId: "auth-df504",
-  storageBucket: "auth-df504.appspot.com",
-  messagingSenderId: "862292127831",
-  appId: "1:862292127831:web:08adf77f5e5d65f611b312",
-  measurementId: "G-877Y9N5Q98"
+  apiKey: "AIzaSyALOlZ4CBgKvOsh3xLhiW2zuvlRvmrOl9Q",
+  authDomain: "clubhub-9bb7a.firebaseapp.com",
+  databaseURL: "https://clubhub-9bb7a.firebaseio.com",
+  projectId: "clubhub-9bb7a",
+  storageBucket: "clubhub-9bb7a.appspot.com",
+  messagingSenderId: "906640855139",
+  appId: "1:906640855139:web:d682aafc042905be922856",
+  measurementId: "G-7TQQYV5G2Y"
 };
 
 firebase.initializeApp(configOptions);
