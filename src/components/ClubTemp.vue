@@ -1,27 +1,71 @@
 <template>
-  <div>
-      <myheader></myheader>
-      <router-view></router-view>
-      <myfooter></myfooter>
-  </div>
+    <html>
+         <head>
+        <title>Student Club Hub</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+       
+
+        
+        <div id = "clubinfo">
+            <div id = "banner">
+                <h1>Club Name <img src = '../assets/wulogo.jpg' alt="Walsh logo"></h1>
+            </div>
+
+            <div id = "info">
+                <h3>Address: 2020 East Maple, North Canton, OH 44720</h3>
+                <h3>Location: GLC 217 </h3>
+                <h3>Meeting Time: 6:00pm - 7:30pm </h3>
+                <h3>Meeting Frequency: Bi-weekly </h3>
+            </div>
+
+            <div class="card">
+                <img src='../assets/jerkofsky-j.jpg' alt="Avatar" style="width:100%">
+                <div class="container">
+                  <h4><b>Jim Jerkofsky</b></h4>
+                  <p>Club President</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <img src= '../assets/jerkofsky-j.jpg' alt="Avatar" style="width:100%">
+                <div class="container">
+                  <h4><b>John Doe</b></h4>
+                  <p>Architect & Engineer</p>
+                </div>
+              </div>
+
+            
+        </div>
+            
+        <div id = "messages">
+             <div id = "notifications">  
+                <h1>Notifications</h1> 
+             </div> 
+                <ul>
+                    <li>JJ: CS Club meeting @ midnight! Be there or fail my class.</li>
+                    <li>David Kelly: Sorry guys I dropped the class and ghosted y'all.</li>
+                    <li>John Doe: Why do I look like JJ?</li>
+                </ul>
+        </div>
+    
+        
+    </body>
+    </html>
 </template>
 
 <script>
-import Header from './components/Header.vue'
-import Footer from './components/Footer.vue'
 
 export default {
-  components:{
-    'myheader': Header,
-    'myfooter': Footer
-  }
-}
+
+};
 </script>
 
 <style scoped>
-*{
+ *{
   box-sizing: border-box;
-}
+} 
 
 #header{
   background-color: maroon;
@@ -152,7 +196,15 @@ color: maroon;
   display: inline;
 }
 
-
+#footer{
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:gold;
+  text-align: center;
+  color: maroon;
+  position: fixed;
+}
 
 #clubinfo{
   box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
@@ -161,7 +213,7 @@ color: maroon;
   float: left;
   width: 70%;
   top: 0;
-  margin-bottom: 5%;
+  margin-bottom: 6%;
 }
 
 
@@ -198,6 +250,5 @@ color: maroon;
   float: left;
   max-width: 50%;
 }
-
 
 </style>
