@@ -1,89 +1,30 @@
 <template>
-<<<<<<< HEAD
-<html>
-  <head>
-        <title>Student Club Hub</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div id = "header">
-            <h1>Student Club Hub</h1>
-        </div>
-
-        <div id = "welcome">
-            <p>Welcome to Student Club Hub, the place where you can connect with clubs at Walsh and the greater Canton Area!</p>
-        </div>
-
-        <div id = "navbar">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="news.asp">Your Clubs</a></li>
-                <li><a href="contact.asp">Contact</a></li>
-                <li><a href="about.asp">About</a></li>
-                <li style="float:right"><a  href="#Login">Login</a></li>
-                <li style="float:right"><a  href="TEST.html">Sign-Up</a></li>
-              </ul>
-        </div>
-        
-        
-        <div class = "flex-container">
-            <div id = "content">
-              <p>
-                <add-blog></add-blog>
-                <show-blogs></show-blogs>
-              </p>
-            </div>
-        
-            <div id = "messages">
-                <ul>
-                    <li><p>New Message</p></li>
-                    <li><p>New Message</p></li>
-                    <li><p>New Message</p></li>
-                </ul>
-            </div>
-    </div>
-    </body>
-
-</html>
-</template>
-
-<script>  
-import AddBlog from './components/AddBlog.vue';
-import ShowBlogs from './components/ShowBlogs.vue'
-
-export default {
-  components: {
-    'add-blog': AddBlog,
-    'show-blogs' : ShowBlogs
-  }
-}
-
-=======
   <div>
       <myheader></myheader>
       <router-view></router-view>
       <myfooter></myfooter>
+      <add-blog></add-blog>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+import AddBlog from './components/AddBlog.vue'
 
 export default {
   components:{
     'myheader': Header,
-    'myfooter': Footer
+    'myfooter': Footer,
+    'add-blog': AddBlog
   }
 }
->>>>>>> ff88a3b1ba9c2bfef9cb936893d58e2c8b023660
 </script>
 
 <style scoped>
 *{
   box-sizing: border-box;
 }
-
 #header{
   background-color: maroon;
   color: gold;
@@ -100,14 +41,12 @@ body{
   background-color: honeydew;
   color: maroon;
 }
-
 #navbar{
   width: 100%;
   position: sticky;
   position: -webkit-sticky;
   top: 0;
 }
-
 #navbar ul {
   list-style-type: none;
   margin: 0;
@@ -118,7 +57,6 @@ body{
   width: 100%;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.20), 0 2px 10px 0 rgba(0,0,0,0.20);
 }
-
 #welcome{
   padding: 10px;
   font-size: larger;
@@ -136,7 +74,6 @@ background-color: maroon;
 #navbar li {
 float: left;
 }
-
 li a{
 display: block;
 color: gold;
@@ -144,7 +81,6 @@ text-align: center;
 padding: 14px 16px;
 text-decoration: none;
 }
-
 li a:hover {
 background-color: gold;
 color: maroon;
@@ -179,27 +115,22 @@ color: maroon;
     border-radius: 1px;
     margin: 1%;
 }
-
 #messages h1{
   background-color: gold;
   color: maroon;
   width: 100%;
 }
-
-
 #banner{
   background-color: gold;
   height: 75px;
   top: 0;
   position: relative;
 }
-
 #banner h1{
   padding-top: 2%;
   align-self: center;
   margin-left: 2%;
 }
-
 #banner img{
   height: 37px;
   width: 50px;
@@ -208,13 +139,9 @@ color: maroon;
   margin-right: 1.5%;
   vertical-align: middle;
 }
-
 #main{
   display: inline;
 }
-
-
-
 #clubinfo{
   box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
   padding-bottom: 1%;
@@ -224,8 +151,6 @@ color: maroon;
   top: 0;
   margin-bottom: 5%;
 }
-
-
 .card {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -237,28 +162,22 @@ color: maroon;
   float: right;
   background-color: gold;
 }
-
 /* On mouse-over, add a deeper shadow */
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.7);
 }
-
 /* Add some padding inside the card container */
 .container {
   padding: 2px 16px;
   display: inline;
 }
-
 #notifications{
   background-color: gold;
   width: 100%;
 }
-
 #info{
   margin-left: 2%;
   float: left;
   max-width: 50%;
 }
-
-
 </style>
