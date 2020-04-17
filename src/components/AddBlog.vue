@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import db from './firebaseConfig'
+
 export default {
     data(){
         return{
@@ -54,20 +56,27 @@ export default {
         }
     },
 
+    firestore() {
+        return {
+            post: store.collection('posts'),
+        }
+    },
     methods:{
         post: function(){
-            this.$http.post("https://jsonplaceholder.typicode.com/posts",{
-                title: this.blog.title, 
-                body: this.blog.content,
-                userID: 1
+            this.$firestore.posts.add(
+                {
+                    title: this.blog.title, 
+                    body: this.blog.content,
+                    userID: 1
             }).then(function(data){
                 console.log(data);
                 this.submited = true;
             });
         }
-
     }
 }
+
+
 </script>
 
 <style >

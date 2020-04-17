@@ -4,6 +4,7 @@
       <router-view></router-view>
       <myfooter></myfooter>
       <add-blog></add-blog>
+      <show-blogs></show-blogs>
   </div>
 </template>
 
