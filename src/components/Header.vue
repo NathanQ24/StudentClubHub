@@ -15,7 +15,7 @@
                 <li><a href="contact.asp">Contact</a></li>
                 <li><a href="about.asp">About</a></li>
                 <template v-if="user.loggedIn">
-                <div class="nav-item">{{user.data.displayName}}</div>
+                <li>Welcome, {{user.data.displayName}}</li>
                 <li class="nav-item">
                   <a class="nav-link" @click.prevent="signOut">Sign out</a>
                 </li>
