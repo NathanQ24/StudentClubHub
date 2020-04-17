@@ -11,7 +11,11 @@
     "buttercms": "^1.2.2",
     "core-js": "^3.6.4",
     "vue": "^2.6.11",
+<<<<<<< HEAD
     "vue-resource": "^1.5.1"
+=======
+    "vue-router": "^3.1.6"
+>>>>>>> ff88a3b1ba9c2bfef9cb936893d58e2c8b023660
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",
