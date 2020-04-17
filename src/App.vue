@@ -11,12 +11,14 @@
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import AddBlog from './components/AddBlog.vue'
+import ShowBlogs from './components/ShowBlogs.vue'
 
 export default {
   components:{
     'myheader': Header,
     'myfooter': Footer,
-    'add-blog': AddBlog
+    'add-blog': AddBlog,
+    'show-blogs': ShowBlogs
   }
 }
 </script>
