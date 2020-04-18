@@ -139,7 +139,7 @@ export default {
               displayName: this.form.fname
             })
             .then(() => {});
-            this.$router.replace({ fname: "Dashboard" });
+            this.$router.replace({ name: "Dashboard" });
 
             firebase.firestore().collection('user').add({
             firstName: this.form.fname,
