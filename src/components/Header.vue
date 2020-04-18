@@ -11,9 +11,7 @@
         <div id = "navbar">
             <ul>
                 <li><router-link to = "/">Home</router-link></li>
-                <li><router-link to = "/club">Your Clubs</router-link></li>
-                <li><a href="contact.asp">Contact</a></li>
-                <li><a href="about.asp">About</a></li>
+                <li><router-link to = "/club">Clubs</router-link></li>
                 <template v-if="user.loggedIn">
                 <li>Welcome, {{user.data.displayName}}</li>
                 <li class="nav-item">
@@ -22,8 +20,9 @@
               </template>
                 <template v-else>
                   <li><router-link to = "/add-post">Posts</router-link></li>
-                <li><router-link to = "/login">Login</router-link></li>
-                <li><router-link to = "/register">Register</router-link></li>
+                  <li><router-link to = "/addClub">Create Club</router-link></li>
+                <li style="float:right"><router-link to = "/login">Login</router-link></li>
+                <li style="float:right"><router-link to = "/register">Register</router-link></li>
                 </template>
               </ul>
         </div>
@@ -59,7 +58,6 @@ export default {
     *{
   box-sizing: border-box;
 }
-
 #header{
   background-color: maroon;
   color: gold;
@@ -76,14 +74,12 @@ body{
   background-color: honeydew;
   color: maroon;
 }
-
 #navbar{
   width: 100%;
   position: sticky;
   position: -webkit-sticky;
   top: 0;
 }
-
 #navbar ul {
   list-style-type: none;
   margin: 0;
@@ -94,7 +90,6 @@ body{
   width: 100%;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.20), 0 2px 10px 0 rgba(0,0,0,0.20);
 }
-
 #welcome{
   padding: 10px;
   font-size: larger;
@@ -112,7 +107,6 @@ background-color: maroon;
 #navbar li {
 float: left;
 }
-
 li a{
 display: block;
 color: gold;
@@ -120,10 +114,8 @@ text-align: center;
 padding: 14px 16px;
 text-decoration: none;
 }
-
 li a:hover {
 background-color: gold;
 color: maroon;
 }
 </style>
-
