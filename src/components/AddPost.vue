@@ -7,17 +7,15 @@
             <input type="text" v-model.lazy="blog.title" required />
             <label>Blog Content:</label>
             <textarea v-model.lazy="blog.content"></textarea>
-            <div id="checkboxes">
-                <label>Computer</label>
-                <input type="checkbox" value="Computer" v-model="blog.categories"/>
-                <label>Business</label>
-                <input type="checkbox" value="Business" v-model="blog.categories"/>
-                <label>Art</label>
-                <input type="checkbox" value="Art" v-model="blog.categories"/>
-                <label>Physical Therapy</label>
-                <input type="checkbox" value="Physical Therapy" v-model="blog.categories"/>
-                <label>Programming</label>
-                <input type="checkbox" value="Programming" v-model="blog.categories"/>
+            <div id="selectbox">
+                <select v-model.lazy="blog.categories">
+                    <option disabled value="">Choose Interest </option>
+                    <option v-for="interest in interests" :key="interest.title">{{interest.title}} </option>
+                <!-- v-for= "interest in interests" :key="interest.interestID"
+                <label>{{interest.title}}</label>
+                <input type="checkbox" value="interest.title" v-model="blog.categories"/> -->
+                </select>
+                
             </div>
             <button v-on:click.prevent="post">Add Blog</button>
 
@@ -48,6 +46,7 @@ import firebase from "firebase";
 export default {
   data() {
     return {
+        interests: [],
         blog: {
                 title:"",
                 content:"",
@@ -56,16 +55,31 @@ export default {
             submitted: false,
     };
   },
+
+  mounted(){
+      firebase.firestore().collection('interests')
+      .get()
+      .then(snap => {
+          const interests = [];
+          snap.forEach(doc => {
+              interests.push({ [doc.id]: doc.data() });
+          });
+          this.interests = interests;
+      });
+  },
+
   methods: {
       post: function(){
             firebase.firestore().collection('posts').add(
                 {
                     title: this.blog.title, 
                     body: this.blog.content,
-                    userID: 1
+                    categories: this.blog.categories,
+                    userID: firebase.auth().currentUser
                 })
       }
-  }
+  },
+
 }
 
 </script>
@@ -100,10 +114,6 @@ input[type="text"],textarea{
 h3{
     margin-top: 10px;
 }
-#checkboxes input{
-    display: inline-block;
-    margin-right: 10px;
-}
-#checkboxes label{
-    display: inline-block;
+#selectbox{
+    color: black; 
 }
