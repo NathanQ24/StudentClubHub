@@ -21,6 +21,7 @@
                 </li>
               </template>
                 <template v-else>
+                  <li><router-link to = "/add-post">Posts</router-link></li>
                 <li><router-link to = "/login">Login</router-link></li>
                 <li><router-link to = "/register">Register</router-link></li>
                 </template>
