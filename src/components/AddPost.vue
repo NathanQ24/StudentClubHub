@@ -1,5 +1,5 @@
 <template>
-    <div id="add-blog">
+    <div id="add-post">
         <h2>Add a New Blog Post</h2>
         <form> 
              <!-- v-if="!submited"> -->
@@ -42,7 +42,6 @@
 
 <script>
 import firebase from "firebase";
-
 export default {
   data() {
     return {
@@ -55,7 +54,6 @@ export default {
             submitted: false,
     };
   },
-
   mounted(){
       firebase.firestore().collection('interests')
       .get()
@@ -67,7 +65,6 @@ export default {
           this.interests = interests;
       });
   },
-
   methods: {
       post: function(){
             firebase.firestore().collection('posts').add(
@@ -79,18 +76,18 @@ export default {
                 })
       }
   },
-
 }
-
 </script>
 
 <style >
-#add-blog *{
+#add-post *{
     box-sizing: border-box;
 }
-#add-blog{
+#add-post{
     max-width: 500px;
     margin: 20px auto;
+    background: maroon;
+    padding: 3%;
 }
 label{
     display: block;
@@ -103,8 +100,9 @@ input[type="text"],textarea{
 }
 #preview{
     padding: 10px 20px;
-    border: 1px dotted #ccc;
+    border: 2px outset maroon;
     margin: 30px 0;
+    background: gold;
 }
 #cat{
     
@@ -114,6 +112,16 @@ input[type="text"],textarea{
 h3{
     margin-top: 10px;
 }
+
+h2{
+  color: gold;
+}
+
+label{
+  color: gold;
+}
+
 #selectbox{
     color: black; 
 }
+</style>
