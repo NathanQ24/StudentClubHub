@@ -26,16 +26,29 @@
         <div v-if="error" class="alert alert-danger">{{error}}</div>
         <form action="#" @submit.prevent="submit">
           <p>
-            <label>Name</label>
+            <label>First Name</label>
             <input
-                    id="name"
-                    type="name"
+                    id="fname"
+                    type="fname"
                     class="form-control"
-                    name="name"
+                    name="fname"
                     value
                     required
                     autofocus
-                    v-model="form.name"
+                    v-model="form.fname"
+                  />
+          </p>
+          <p>
+            <label>Last Name</label>
+            <input
+                    id="lname"
+                    type="lname"
+                    class="form-control"
+                    name="lname"
+                    value
+                    required
+                    autofocus
+                    v-model="form.lname"
                   />
           </p>
           <p>
@@ -59,12 +72,19 @@
                     class="form-control"
                     name="password"
                     required
-                    v-model="form.password"
-                  />
+                    v-model="form.password1"
+              />
           </p>
           <p>
             <label>Confirm Password</label>
-            <input type="password" name="confirmpassword">
+            <input 
+              id="password"
+              type="password"
+              class="form-control"
+              name="password"
+              required
+              v-model="form.password2"
+             />
           </p>
           <p>
             <label>Major</label>
@@ -98,29 +118,42 @@ export default {
   data() {
     return {
       form: {
-        name: "",
+        fname: "",
+        lname: "",
         email: "",
-        password: ""
+        password1: "",
+        password2: ""
       },
       error: null
     };
   },
   methods: {
     submit() {
+      if(this.form.password1 === this.form.password2){
       firebase
         .auth()
-        .createUserWithEmailAndPassword(this.form.email, this.form.password)
+        .createUserWithEmailAndPassword(this.form.email, this.form.password1)
         .then(data => {
           data.user
             .updateProfile({
-              displayName: this.form.name
+              displayName: this.form.fname
             })
             .then(() => {});
             this.$router.replace({ name: "Dashboard" });
+
+            firebase.firestore().collection('user').add({
+            firstName: this.form.fname,
+            lastName: this.form.lname,
+            id: firebase.auth().currentUser.uid
+        })
         })
         .catch(err => {
           this.error = err.message;
         });
+    }
+    else{
+      alert("Password must match.")
+    }
     }
   }
 };
