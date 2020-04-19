@@ -1,27 +1,13 @@
 <template>
-<<<<<<< HEAD
     <div id="add-post">
-=======
-    <div id="add-blog">
->>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
         <h2>Add a New Blog Post</h2>
-        <form> 
-             <!-- v-if="!submited"> -->
+        <form @submit.prevent="formPost" v-if="!submited">
             <label>Blog Title:</label>
             <input type="text" v-model.lazy="blog.title" required />
             <label>Blog Content:</label>
             <textarea v-model.lazy="blog.content"></textarea>
-            <div id="selectbox">
-                <select v-model.lazy="blog.categories">
-                    <option disabled value="">Choose Interest </option>
-                    <option v-for="interest in interests" :key="interest.title">{{interest.title}} </option>
-                <!-- v-for= "interest in interests" :key="interest.interestID"
-                <label>{{interest.title}}</label>
-                <input type="checkbox" value="interest.title" v-model="blog.categories"/> -->
-                </select>
-                
-            </div>
-            <button v-on:click.prevent="post">Add Blog</button>
+            
+            <button v-on:click.prevent="post">Publish Post</button>
 
         </form> 
         <div v-if="submitted">
@@ -33,27 +19,15 @@
             <p>Blog title: {{ blog.title }}</p>
             <p>Blog content:</p>
             <p>{{ blog.content }}</p>
-            <p>Blog Categories</p>
-            <ul id="cat">
-                <li v-for="category in blog.categories" :key="category"><p>{{ category }}</p></li>
-            </ul>
-
-
         </div>
-
     </div>
 </template>
 
 <script>
 import firebase from "firebase";
-<<<<<<< HEAD
-=======
-
->>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
 export default {
   data() {
     return {
-        interests: [],
         blog: {
                 title:"",
                 content:"",
@@ -62,37 +36,22 @@ export default {
             submitted: false,
     };
   },
-<<<<<<< HEAD
-=======
 
->>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
-  mounted(){
-      firebase.firestore().collection('interests')
-      .get()
-      .then(snap => {
-          const interests = [];
-          snap.forEach(doc => {
-              interests.push({ [doc.id]: doc.data() });
-          });
-          this.interests = interests;
-      });
-  },
-<<<<<<< HEAD
-=======
 
->>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
   methods: {
-      post: function(){
+      post(){
             firebase.firestore().collection('posts').add(
                 {
                     title: this.blog.title, 
                     body: this.blog.content,
-                    categories: this.blog.categories,
-                    userID: firebase.auth().currentUser
+                    userID: firebase.auth().currentUser.uid
                 })
+            .then(() => {
+                this.submitted=true;
+            })
       }
   },
-<<<<<<< HEAD
+
 }
 </script>
 
@@ -105,20 +64,14 @@ export default {
     margin: 20px auto;
     background: maroon;
     padding: 3%;
-=======
-
 }
 
-</script>
-
-<style >
 #add-blog *{
     box-sizing: border-box;
 }
 #add-blog{
     max-width: 500px;
     margin: 20px auto;
->>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
 }
 label{
     display: block;
@@ -131,14 +84,9 @@ input[type="text"],textarea{
 }
 #preview{
     padding: 10px 20px;
-<<<<<<< HEAD
     border: 2px outset maroon;
     margin: 30px 0;
     background: gold;
-=======
-    border: 1px dotted #ccc;
-    margin: 30px 0;
->>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
 }
 #cat{
     
@@ -148,19 +96,10 @@ input[type="text"],textarea{
 h3{
     margin-top: 10px;
 }
-<<<<<<< HEAD
 h2{
   color: gold;
 }
 label{
   color: gold;
 }
-#selectbox{
-    color: black; 
-}
-</style>
-=======
-#selectbox{
-    color: black; 
-}
->>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
+
