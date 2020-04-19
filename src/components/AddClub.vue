@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Acme Web Design</title>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
@@ -11,7 +10,7 @@
 </head>
 <body>
   <div class="container">
-    <h1 class="brand"><span>Sign Up</span></h1>
+    <h1 class="brand"><span>Add your Club to Student Club Hub</span></h1>
     <div class="wrapper animated bounceInLeft">
       <div class="company-info">
         <h3>Contact Us</h3>
@@ -22,85 +21,118 @@
         </ul>
       </div>
       <div class="contact">
-        <h3>Sign Up for the Student Club Hub</h3>
-        <div v-if="error" class="alert alert-danger">{{error}}</div>
+        <h3>Create A New Club</h3>
+        
         <form action="#" @submit.prevent="submit">
           <p>
-            <label>First Name</label>
+            <label>Club Name</label>
             <input
-                    id="fname"
-                    type="fname"
+                    id="name"
+                    type="name"
                     class="form-control"
-                    name="fname"
+                    name="name"
                     value
                     required
                     autofocus
-                    v-model="form.fname"
+                    v-model="form.name"
                   />
           </p>
+
           <p>
-            <label>Last Name</label>
+            <label>Typical Meeting Time</label>
             <input
-                    id="lname"
-                    type="lname"
+                    id="meeting"
+                    type="name"
                     class="form-control"
-                    name="lname"
+                    name="meeting"
+                    placeholder="Ex. 12:00pm"
                     value
                     required
                     autofocus
-                    v-model="form.lname"
+                    v-model="form.meetingTime"
                   />
           </p>
+
           <p>
-            <label>Password</label>
+            <label>Meeting Days</label>
+            <input
+                    id="meeting-days"
+                    type="name"
+                    class="form-control"
+                    name="meeting-days"
+                    placeholder="Ex. MWF"
+                    value
+                    required
+                    autofocus
+                    v-model="form.meetingDays"
+                  />
+          </p>
+
+          <p>
+            <label>Address</label>
+            <input
+                    id="address"
+                    type="name"
+                    class="form-control"
+                    name="address"
+                    value
+                    required
+                    autofocus
+                    v-model="form.address"
+                  />
+          </p>  
+
+          <p>
+            <label>Location</label>
+            <input
+                    id="meeting-days"
+                    type="name"
+                    class="form-control"
+                    name="meeting-days"
+                    placeholder="Ex. GLC 217"
+                    value
+                    required
+                    autofocus
+                    v-model="form.location"
+                  />
+          </p>
+
+
+            
+            <p class="full">
+            <label>Club Bio</label>
+             <textarea name="message" v-model="form.bio" rows="5"></textarea>
+           
+             <p class = "full">
+          
+            <label for="logo">Club Logo:</label>
+
+            <input type="file"
+            id="logo" name="logo"
+            accept="image/png, image/jpeg">
+        </p>
+
+          <!-- <p>
+            <label>Admin Password</label>
             <input
                     id="password"
                     type="password"
                     class="form-control"
                     name="password"
                     required
-                    v-model="form.password1"
-              />
-          </p>
-          <p>
-            <label>Confirm Password</label>
-            <input 
-              id="password"
-              type="password"
-              class="form-control"
-              name="password"
-              required
-              v-model="form.password2"
-             />
-          </p>
-          <p>
-            <label>Email Address</label>
-            <input
-                    id="email"
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    value
-                    required
-                    autofocus
-                    v-model="form.email"
+                    v-model="form.password"
                   />
           </p>
-          <!-- <p>
-            <label>Major</label>
-            <select name="major">
-              <option value="1">Computer Science</option>
-              <option value="2">Business</option>
-              <option value="3">Nursing</option>
-              <option value="4">Graphic Design</option>
-            </select>
-          </p>
-          <p class="full">
-            <label>Message</label>
-            <textarea name="message" rows="5"></textarea>
+       
+
+          <p>
+            <label>Confirm Password</label>
+            <input type="password" name="confirmpassword">
           </p> -->
+          
+          
           <p class="full">
-            <button>Submit</button>
+            <button v-on:click.prevent ="post">Create Club</button>
           </p>
         </form>
         </div>
@@ -110,58 +142,57 @@
 </html>
 </template>
 
-
 <script>
 import firebase from "firebase";
+
 export default {
   data() {
     return {
       form: {
-        fname: "",
-        lname: "",
-        email: "",
-        password1: "",
-        password2: ""
+        name: "",
+        meetingTime: "",
+        password: "",
+        meetingDays: "",
+        logo: "",
+        address: "",
+        location: "",
+        bio: "",
+        id: ""
       },
       error: null
     };
   },
   methods: {
-    submit() {
-      if(this.form.password1 === this.form.password2){
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.form.email, this.form.password1)
-        .then(data => {
-          data.user
-            .updateProfile({
-              displayName: this.form.fname
-            })
-            .then(() => {});
-            this.$router.replace({ name: "Dashboard" });
-            firebase.firestore().collection('user').add({
-            firstName: this.form.fname,
-            lastName: this.form.lname,
-            id: firebase.auth().currentUser.uid
-        })
-        this.$router.replace({ name: "Dashboard" });
-        })
-        .catch(err => {
-          this.error = err.message;
-        });
-    }
-    else{
-      alert("Password must match.")
-    }
-    }
+    post:function(){
+      firebase.firestore().collection('clubs').add({
+         name: this.form.name,
+         time: this.form.meetingTime,
+         days: this.form.meetingDays,
+         address: this.form.address,
+         location: this.form.location,
+         bio: this.form.bio
+    }).then(function(docRef) {
+      firebase.firestore().collection('clubsJoined').add({
+      accessLevel: 1,
+      clubID: docRef.id,
+      userID: firebase.auth().currentUser.uid
+    })
+    this.$router.replace({ name: "Dashboard" });
+    }).catch(function(err) {
+      this.error = err.message
+    });
   }
-};
+}
+}
+
 </script>
+
 
 <style scoped>
 *{
   box-sizing: border-box;
 }
+
 body{
   background: maroon;
   color: black;
@@ -169,78 +200,97 @@ body{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding:1em;
 }
+
 .container{
   max-width:1170px;
   margin-left:auto;
   margin-right:auto;
   padding:1em;
 }
+
 ul{
   list-style: none;
   padding:0;
 }
+
 .brand{
   text-align: center;
 }
+
 .brand span{
   color:#fff;
 }
+
 .wrapper{
   box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
 }
+
 .wrapper > *{
   padding: 1em;
 }
+
 .company-info{
   background:gold;
 }
+
 .company-info h3, .company-info ul{
   text-align: center;
   margin:0 0 1rem 0;
 }
+
 .contact{
   background:#f9feff;
 }
+
 /* FORM STYLES */
 .contact form{
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap:20px;
 }
+
 .contact form label{
   display:block;
 }
+
 .contact form p{
   margin:0;
 }
+
 .contact form .full{
   grid-column: 1 / 3;
 }
+
 .contact form button, .contact form input, .contact form textarea{
   width:100%;
   padding:1em;
   border:1px solid maroon;
 }
+
 .contact form button{
   background:gold;
   border:0;
   text-transform: uppercase;
 }
+
 .contact form button:hover,.contact form button:focus{
   background:maroon;
   color:#fff;
   outline:0;
   transition: background-color 2s ease-out;
 }
+
 /* LARGE SCREENS */
 @media(min-width:700px){
   .wrapper{
     display: grid;
     grid-template-columns: 1fr 2fr;
   }
+
   .wrapper > *{
     padding:2em;
   }
+
   .company-info h3, .company-info ul, .brand{
     text-align: left;
   }

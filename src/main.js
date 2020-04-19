@@ -4,7 +4,9 @@ import VueRouter from 'vue-router'
 import Routes from './routes'
 import * as firebase from "firebase";
 import store from "./store";
+import VueResource from 'vue-resource'
 
+Vue.use(VueResource);
 Vue.use(VueRouter);
 
 
@@ -13,7 +15,8 @@ const router = new VueRouter({
   mode:'history'
 });
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
+
 
 const configOptions = {
   apiKey: "AIzaSyALOlZ4CBgKvOsh3xLhiW2zuvlRvmrOl9Q",
