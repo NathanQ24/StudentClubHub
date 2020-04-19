@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
     <div id="add-post">
+=======
+    <div id="add-blog">
+>>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
         <h2>Add a New Blog Post</h2>
         <form> 
              <!-- v-if="!submited"> -->
@@ -42,6 +46,10 @@
 
 <script>
 import firebase from "firebase";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
 export default {
   data() {
     return {
@@ -54,6 +62,10 @@ export default {
             submitted: false,
     };
   },
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
   mounted(){
       firebase.firestore().collection('interests')
       .get()
@@ -65,6 +77,10 @@ export default {
           this.interests = interests;
       });
   },
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
   methods: {
       post: function(){
             firebase.firestore().collection('posts').add(
@@ -76,6 +92,7 @@ export default {
                 })
       }
   },
+<<<<<<< HEAD
 }
 </script>
 
@@ -88,6 +105,20 @@ export default {
     margin: 20px auto;
     background: maroon;
     padding: 3%;
+=======
+
+}
+
+</script>
+
+<style >
+#add-blog *{
+    box-sizing: border-box;
+}
+#add-blog{
+    max-width: 500px;
+    margin: 20px auto;
+>>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
 }
 label{
     display: block;
@@ -100,9 +131,14 @@ input[type="text"],textarea{
 }
 #preview{
     padding: 10px 20px;
+<<<<<<< HEAD
     border: 2px outset maroon;
     margin: 30px 0;
     background: gold;
+=======
+    border: 1px dotted #ccc;
+    margin: 30px 0;
+>>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
 }
 #cat{
     
@@ -112,6 +148,7 @@ input[type="text"],textarea{
 h3{
     margin-top: 10px;
 }
+<<<<<<< HEAD
 h2{
   color: gold;
 }
@@ -122,3 +159,8 @@ label{
     color: black; 
 }
 </style>
+=======
+#selectbox{
+    color: black; 
+}
+>>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
