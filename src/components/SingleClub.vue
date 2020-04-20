@@ -1,24 +1,19 @@
 <template>
     <div id="single-club">
+        <!-- <h1>This is a test: {{ clubIds }}</h1> -->
         <h1>Club: {{club.name}}</h1>
         <article>Location: {{club.location}}</article>
     </div>
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
+    props: ['clubIds'],
     data () {
         return {
-            id: this.$route.params.id,
-            club: {}
         }
-    },
-    created() {
-        this.$http.get('https://clubhub-9bb7a.firebaseio.com/clubs/' + this.id + '.json').then(function(data){
-            return data.json();
-        }).then(function(data){
-            this.club = data
-        });
     }
 }
 </script>
