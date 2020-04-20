@@ -116,13 +116,13 @@ export default {
     max-width: 800px;
     margin: 20px auto;
      background: gold;
-    border: 3px dotted maroon;
+    border: 3px ridge maroon;
 }
 .single-club{
     padding: 20px;
     margin: 20px 20px;
     background: gold;
-    border: 3px dotted maroon;
+    border: 3px ridge maroon;
 }
 
 .single-club h2{

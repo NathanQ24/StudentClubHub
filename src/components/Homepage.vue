@@ -16,9 +16,8 @@
               <p>Make posts that other members are able to see in order to communicate with your club!</p>
             </div>
 
-            <div id = "content">  
+           <div id = "content">  
               <h1>Sign-Up Today!</h1>
-              <p>What are you waiting for? Sign up now and join some clubs!</p>
               <button type="button"><router-link to = "/register">Sign-up</router-link></button>
             </div>
     </body>
@@ -109,8 +108,8 @@ color: maroon;
   background-color: gold;
   width: 48%;
   height: 30%;
-  box-shadow: 0 0 40px 0 rgba(99, 35, 23, 0.7);
-  
+  box-shadow: 0 0 20px 0 rgba(99, 35, 23, 0.7);
+  border: 3px ridge maroon;
 }
 
 button{
