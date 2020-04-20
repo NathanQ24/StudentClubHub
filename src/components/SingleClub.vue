@@ -1,5 +1,6 @@
 <template>
     <div id="single-club">
+        <h2> club id = {{id}}</h2>
         <h1>Club: {{club.name}}</h1>
         <article>Location: {{club.location}}</article>
     </div>
@@ -13,12 +14,15 @@ export default {
             club: {}
         }
     },
+    // created() {
+    //     this.$http.get('https://clubhub-9bb7a.firebaseio.com/clubs/' + this.id + '.json').then(function(data){
+    //         return data.json();
+    //     }).then(function(data){
+    //         this.club = data
+    //     });
+    // },
     created() {
-        this.$http.get('https://clubhub-9bb7a.firebaseio.com/clubs/' + this.id + '.json').then(function(data){
-            return data.json();
-        }).then(function(data){
-            this.club = data
-        });
+        this.id = this.$route.params.id;
     }
 }
 </script>

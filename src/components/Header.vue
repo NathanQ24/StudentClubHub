@@ -19,14 +19,8 @@
                 <li style="float:right"><a>Welcome, {{user.data.displayName}}</a></li>
               </template>
                 <template v-else>
-<<<<<<< HEAD
                 <li style="float:right"><router-link to = "/register">Register</router-link></li>
                 <li style="float:right"><router-link to = "/login">Login</router-link></li>
-=======
-                  <li><router-link to = "/add-post">Posts</router-link></li>
-                <li><router-link to = "/login">Login</router-link></li>
-                <li><router-link to = "/register">Register</router-link></li>
->>>>>>> 6d4906418b18a6ae76074d82d155a8175b68a699
                 </template>
               </ul>
         </div>

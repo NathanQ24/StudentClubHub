@@ -1,7 +1,10 @@
 <template>
-    <div id="add-post">
+    <div v-if="submitted == true">
+            <h3>Thanks for adding a post</h3>
+    </div>
+    <div id="add-post" v-else-if="!submitted">
         <h2>Add a New Blog Post</h2>
-        <form @submit.prevent="formPost" v-if="!submited">
+        <form @submit.prevent="formPost" >
             <label>Blog Title:</label>
             <input type="text" v-model.lazy="blog.title" required />
             <label>Blog Content:</label>
@@ -10,10 +13,7 @@
             <button v-on:click.prevent="post">Publish Post</button>
 
         </form> 
-        <div v-if="submitted">
-            <h3>Thanks for adding a post</h3>
-        </div>    
-
+        
         <div id="preview">
             <h3>Preview Blog</h3>
             <p>Blog title: {{ blog.title }}</p>
@@ -21,7 +21,9 @@
             <p>{{ blog.content }}</p>
         </div>
     </div>
+
 </template>
+
 
 <script>
 import firebase from "firebase";
@@ -42,12 +44,13 @@ export default {
       post(){
             firebase.firestore().collection('posts').add(
                 {
+                    createdOn: new Date(),
                     title: this.blog.title, 
                     body: this.blog.content,
                     userID: firebase.auth().currentUser.uid
                 })
             .then(() => {
-                this.submitted=true;
+                this.submitted=!this.submitted;
             })
       }
   },
