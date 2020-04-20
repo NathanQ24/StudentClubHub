@@ -12,7 +12,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   routes: Routes,
-  mode:'history'
+  mode: 'history'
 });
 
 Vue.config.productionTip = false
@@ -36,7 +36,7 @@ firebase.auth().onAuthStateChanged(user => {
 });
 
 new Vue({
-  el:'#app',
+  el: '#app',
   render: h => h(App),
   router: router,
   store

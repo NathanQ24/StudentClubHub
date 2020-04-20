@@ -10,14 +10,37 @@ import AddPost from './components/AddPost.vue'
 
 
 
-export default[
-    {path: "/", component: Homepage},
-    {path: "/club", component: ClubTemp},
-    {path: "/blog", component: BlogTemp},
+export default [{
+        path: "/",
+        component: Homepage
+    },
+    {
+        path: "/club",
+        component: ClubTemp
+    },
+    {
+        path: "/blog",
+        component: BlogTemp
+    },
     // {path: "/addBlog", component: AddBlog},
-    {path: "/register", component: Register},
-    {path: "/addClub", component: AddClub},
-    {path: "/login", component: Login},
-    {path: "/club/:id", component: SingleClub},
-    {path: "/add-post", component: AddPost}
+    {
+        path: "/register",
+        component: Register
+    },
+    {
+        path: "/addClub",
+        component: AddClub
+    },
+    {
+        path: "/login",
+        component: Login
+    },
+    {
+        path: "/club/:id",
+        component: SingleClub
+    },
+    {
+        path: "/add-post",
+        component: AddPost
+    }
 ]
