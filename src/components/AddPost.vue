@@ -52,15 +52,17 @@ export default {
         posts: [],
     };
   },
-  mounted(){
-      firebase.firestore().collection('interests')
+  mounted() {
+    firebase
+      .firestore()
+      .collection("interests")
       .get()
       .then(snap => {
-          const interests = [];
-          snap.forEach(doc => {
-              interests.push({ [doc.id]: doc.data() });
-          });
-          this.interests = interests;
+        const interests = [];
+        snap.forEach(doc => {
+          interests.push({ [doc.id]: doc.data() });
+        });
+        this.interests = interests;
       });
   },
   methods: {
@@ -98,14 +100,14 @@ export default {
 </script>
 
 <style >
-#add-post *{
-    box-sizing: border-box;
+#add-post * {
+  box-sizing: border-box;
 }
-#add-post{
-    max-width: 500px;
-    margin: 20px auto;
-    background: maroon;
-    padding: 3%;
+#add-post {
+  max-width: 500px;
+  margin: 20px auto;
+  background: maroon;
+  padding: 3%;
 }
 
 #show-blogs{
@@ -122,36 +124,36 @@ export default {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
 }
-label{
-    display: block;
-    margin: 20px 0 10px;
+label {
+  display: block;
+  margin: 20px 0 10px;
 }
-input[type="text"],textarea{
-    display: block;
-    width: 100%;
-    padding: 8px;
+input[type="text"],
+textarea {
+  display: block;
+  width: 100%;
+  padding: 8px;
 }
-#preview{
-    padding: 10px 20px;
-    border: 2px outset maroon;
-    margin: 30px 0;
-    background: gold;
+#preview {
+  padding: 10px 20px;
+  border: 2px outset maroon;
+  margin: 30px 0;
+  background: gold;
 }
-#cat{
-    
-    color-adjust: black;
-    background: white;
+#cat {
+  color-adjust: black;
+  background: white;
 }
-h3{
-    margin-top: 10px;
+h3 {
+  margin-top: 10px;
 }
-h2{
+h2 {
   color: gold;
 }
-label{
+label {
   color: gold;
 }
-#selectbox{
-    color: black; 
+#selectbox {
+  color: black;
 }
 </style>

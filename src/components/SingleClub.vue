@@ -47,11 +47,11 @@ export default {
 </script>
 
 <style>
-    #single-club{
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 20px;
-        background: gold;
-        border: 1px dotted #aaa;
-    }
+#single-club {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+  background: gold;
+  border: 1px dotted #aaa;
+}
 </style>

@@ -1,70 +1,71 @@
 <template>
-      <body>
-      <div id ="club-temp">
-          <input type ="text" v-model="search" placeholder="Search Clubs" />
-              <div v-for="club in filteredClubs" v-bind:key="club" class= "single-club">
-                  <router-link v-bind:to="'/club/' + club.id"><h2>{{ club.name }}</h2></router-link>  
-                  <p>Location: {{club.location}}</p>  
-              </div>  
-      </div>
-        <single-club v-bind:clubIds="this.clubIds"></single-club>
-      </body>
+<body>
+  <div id="club-temp">
+    <input type="text" v-model="search" placeholder="Search Clubs" />
+    <div v-for="club in filteredClubs" v-bind:key="club" class="single-club">
+      <router-link v-bind:to="'/club/' + club.id">
+        <h2>{{ club.name }}</h2>
+      </router-link>
+      <p>Location: {{club.location}}</p>
+    </div>
+  </div>
+  <single-club v-bind:clubIds="this.clubIds"></single-club>
+</body>
 </template>
 
 <script>
 import firebase from "firebase";
-import searchMixins from '../mixins/searchMixins'
-import SingleClub from './SingleClub.vue'
-
+import searchMixins from "../mixins/searchMixins";
+import SingleClub from "./SingleClub.vue";
 
 export default {
-  components:{
+  components: {
     SingleClub
   },
-  data(){
-    return{
+  data() {
+    return {
       clubs: [],
       clubIds: [],
-      search: '',
-    } 
+      search: ""
+    };
   },
 
-  created(){
-    firebase.firestore().collection('clubs')
+  created() {
+    firebase
+      .firestore()
+      .collection("clubs")
       .get()
-      .then((snapshot) => {
+      .then(snapshot => {
         snapshot.docs.forEach(doc => {
           this.clubs.push(doc.data());
           this.clubIds.push(doc.id);
-        })
+        });
         console.log(this.clubIds);
-  }).catch(function(err) {
-    console.log(err)
-  })
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   },
   mixins: [searchMixins]
-}
+};
 </script>
 
 <style scoped>
- *{
+* {
   box-sizing: border-box;
-} 
+}
 
-#club-temp h2{
+#club-temp h2 {
   background-color: gold;
   color: maroon;
 }
 
-
-
-
-#banner h1{
+#banner h1 {
   padding-top: 2%;
   margin-left: 2%;
 }
 
-#banner img{
+#banner img {
   height: 37px;
   width: 50px;
   float: right;
@@ -72,8 +73,8 @@ export default {
   margin-right: 1.5%;
 }
 
-#clubinfo{
-  box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
+#clubinfo {
+  box-shadow: 0 0 20px 0 rgba(72, 94, 116, 0.7);
   padding-bottom: 1%;
   height: fit-content;
   width: 60%;
@@ -83,7 +84,7 @@ export default {
 
 .card {
   /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 18%;
   margin-right: 1%;
@@ -93,7 +94,7 @@ export default {
 
 /* On mouse-over, add a deeper shadow */
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.7);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.7);
 }
 
 /* Add some padding inside the card container */
@@ -101,50 +102,49 @@ export default {
   padding: 2px 16px;
 }
 
-#notifications{
+#notifications {
   background-color: gold;
   width: 100%;
   padding-top: 0;
 }
- 
-#info{
+
+#info {
   margin-left: 2%;
   max-width: 50%;
-} 
-
-#show-clubs{
-    max-width: 800px;
-    margin: 20px auto;
-     background: gold;
-    border: 3px ridge maroon;
-}
-.single-club{
-    padding: 20px;
-    margin: 20px 20px;
-    background: gold;
-    border: 3px ridge maroon;
 }
 
-.single-club h2{
+#show-clubs {
+  max-width: 800px;
+  margin: 20px auto;
+  background: gold;
+  border: 3px ridge maroon;
+}
+.single-club {
+  padding: 20px;
+  margin: 20px 20px;
+  background: gold;
+  border: 3px ridge maroon;
+}
+
+.single-club h2 {
   text-transform: capitalize;
 }
 
-router-link{
+router-link {
   text-decoration: none;
 }
 
 .single-club:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.7);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.7);
 }
 
-#show-clubs a{
-    color: #444;
-    text-decoration: none;
+#show-clubs a {
+  color: #444;
+  text-decoration: none;
 }
-input[type="text"]{
-    padding: 8px;
-    width: 100%;
-    box-sizing: border-box;
+input[type="text"] {
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
 }
-
 </style>
