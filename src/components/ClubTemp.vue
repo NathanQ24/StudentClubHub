@@ -18,6 +18,38 @@
         <article id="clubLocation">location</article>
         <article id="clubDayTime">daytime</article>
         <article id="clubBio">bio</article>
+
+      <div v-if="submitted == true">
+            <h3>Thanks for adding a post</h3>
+    </div>
+
+      <div id="add-post" v-else-if="!submitted">
+        <h2>Add a New Blog Post</h2>
+        <form @submit.prevent="formPost" >
+            <label>Blog Title:</label>
+            <input type="text" v-model.lazy="blog.title" required />
+            <label>Blog Content:</label>
+            <textarea v-model.lazy="blog.content"></textarea>
+            
+            <button v-on:click.prevent="post">Publish Post</button>
+
+        </form> 
+
+        <div id="preview">
+            <h3>Preview Blog</h3>
+            <p>Blog title: {{ blog.title }}</p>
+            <p>Blog content:</p>
+            <p>{{ blog.content }}</p>
+        </div>
+      </div>
+
+        <button @click.once="filt">View this Clubs Posts</button>
+        <li>
+                <div v-for="post in postsF" :key="post" class="single-blog">
+                    <h2>{{ post.title }}</h2>  
+                    <p>{{post.body}}</p>  
+                </div>
+            </li>
       </div>
     </div>
   </div>
@@ -34,7 +66,15 @@ export default {
       clubIds: [],
       search: "",
       selected: false,
-      selectedId: ""
+      selectedId: "",
+      posts: [],
+      postsF: [],
+      blog: {
+                title:"",
+                content:"",
+                categories: []
+            },
+        submitted: false,
     };
   },
   created() {
@@ -51,10 +91,13 @@ export default {
       .catch(function(err) {
         console.log(err);
       });
+    
   },
   methods: {
     back: function() {
       this.selected = false;
+      this.submitted = false;
+      this.postsF = [];
     },
     select: function(name) {
       var ctr = 0;
@@ -80,9 +123,49 @@ export default {
 
       // selectedId now holds key for club doc
       this.selectedId = this.clubIds[ctr];
-    }
+    },
+    filt() {
+      this.posts.forEach(post => {
+        if (post.clubID === this.selectedId) {
+          this.postsF.push(post);
+        }
+       
+      });
+    },
+    post(){
+            firebase.firestore().collection('posts').add(
+                {
+                    createdOn: new Date(),
+                    title: this.blog.title, 
+                    body: this.blog.content,
+                    userID: firebase.auth().currentUser.uid,
+                    clubID: this.selectedId,
+
+                })
+            .then(() => {
+                this.submitted=!this.submitted;
+                this.blog = [];
+            })
+      },
+
   },
-  mixins: [searchMixins]
+  mixins: [searchMixins],
+
+mounted() {
+      firebase.firestore().collection('posts')
+            .get()
+            .then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                    this.posts.push(doc.data());
+                })
+            console.log(this.clubIds);
+            })
+            .catch(function(err) {
+                console.log(err)
+            })
+
+  },
+
 };
 </script>
 

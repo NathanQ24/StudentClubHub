@@ -25,8 +25,9 @@
         </div>
     </div>
         <div id="show-blogs">
+            <button @click.once="filt">View this Clubs Posts</button>
             <li>
-                <div v-for="post in posts" :key="post" class="single-blog"> 
+                <div v-for="post in postsF" :key="post" class="single-blog">
                     <h2>{{ post.title }}</h2>  
                     <p>{{post.body}}</p>  
                 </div>
@@ -41,6 +42,7 @@
 <script>
 import firebase from "firebase";
 export default {
+
   data() {
     return {
         blog: {
@@ -50,21 +52,10 @@ export default {
             },
         submitted: false,
         posts: [],
+        postsF: []
     };
   },
-  mounted() {
-    firebase
-      .firestore()
-      .collection("interests")
-      .get()
-      .then(snap => {
-        const interests = [];
-        snap.forEach(doc => {
-          interests.push({ [doc.id]: doc.data() });
-        });
-        this.interests = interests;
-      });
-  },
+
   methods: {
       post(){
             firebase.firestore().collection('posts').add(
@@ -79,10 +70,21 @@ export default {
             .then(() => {
                 this.submitted=!this.submitted;
             })
-      }
+      },
+    filt() {
+      this.posts.forEach(post => {
+        if (post.clubID === 'JTaG1nwed2gqKNrtEjCw') {
+          this.postsF.push(post);
+        }
+       
+      });
+
+      // selectedId now holds key for club doc
+    //   this.selectedId = this.clubIds[ctr];
+    }
   },
 
-  created() {
+  mounted() {
       firebase.firestore().collection('posts')
             .get()
             .then((snapshot) => {
@@ -96,6 +98,8 @@ export default {
             })
 
   },
+  
+
 }
 </script>
 

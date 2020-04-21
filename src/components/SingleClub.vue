@@ -1,18 +1,15 @@
 <template>
     <div id="single-club">
-        <!-- <h1>This is a test: {{ clubIds }}</h1> -->
+        <!-- <h1>This is a test: {{ clubIds }}</h1>
         <h1>Club: {{club.name}}</h1>
-        <article>Location: {{club.location}}</article>
+        <article>Location: {{club.location}}</article> -->
 
-        <div id="show-blogs">
-            <li>
-                <div v-for="post in posts" :key="post" class="single-blog"> 
-                    <h2>{{ post.title }}</h2>  
-                    <p>{{post.body}}</p>  
-                </div>
-            </li>
-        </div>
-
+        <li>
+            <div v-for="post in posts" :key="post" class="single-blog"> 
+                <h2>{{ post.title }}</h2>  
+                <p>{{post.body}}</p>  
+            </div>
+        </li>
     </div>
 
 </template>
