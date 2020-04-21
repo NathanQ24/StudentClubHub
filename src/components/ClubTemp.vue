@@ -25,6 +25,7 @@ z<template>
         <article id="clubDayTime">daytime</article>
         <article id="clubBio">bio</article>
         <article id = "clickable" v-on:click="join()">Join Club</article>
+        <article id="errMessage"></article>
 
       <div v-if="submitted == true">
             <h3>Thanks for adding a post</h3>
@@ -101,6 +102,7 @@ export default {
       });
     
   },
+  
   methods: {
     back: function() {
       this.selected = false;
@@ -127,6 +129,8 @@ export default {
         } else {
           ctr = ctr + 1;
         }
+
+        
       });
 
       // selectedId now holds key for club doc
@@ -156,25 +160,7 @@ export default {
             })
       },
 
-  },
-  mixins: [searchMixins],
-
-mounted() {
-      firebase.firestore().collection('posts')
-            .get()
-            .then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                    this.posts.push(doc.data());
-                })
-            console.log(this.clubIds);
-            })
-            .catch(function(err) {
-                console.log(err)
-            })
-
-  },
-
-  join: function() {
+    join: function() {
       firebase
         .firestore()
         .collection("clubsJoined")
@@ -198,13 +184,34 @@ mounted() {
                 userID: firebase.auth().currentUser.uid
               });
           } else {
-            alert("You are already a member of this club.");
+            document.getElementById("errMessage").innerHTML = "You are already a member of this club.";
           }
         })
         .catch(err => {
-          alert("You must be logged in to join a club.");
+          document.getElementById("errMessage").innerHTML = "You must be logged in to join a club.";
         });
-    }
+      }
+      
+
+  },
+  mixins: [searchMixins],
+
+mounted() {
+      firebase.firestore().collection('posts')
+            .get()
+            .then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                    this.posts.push(doc.data());
+                })
+            console.log(this.clubIds);
+            })
+            .catch(function(err) {
+                console.log(err)
+            })
+
+  },
+
+  
 
 };
 </script>
