@@ -1,7 +1,6 @@
 import ClubTemp from './components/ClubTemp.vue'
 import Homepage from './components/Homepage.vue'
 import BlogTemp from './components/BlogTemp.vue'
-// import AddBlog from './components/AddBlog.vue'
 import AddClub from './components/AddClub.vue'
 import Register from './components/Register.vue'
 import Login from './components/Login.vue'
