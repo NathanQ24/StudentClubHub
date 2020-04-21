@@ -7,32 +7,37 @@
                   <p>Location: {{club.location}}</p>  
               </div>  
       </div>
+        <single-club v-bind:clubIds="this.clubIds"></single-club>
       </body>
 </template>
 
 <script>
 import firebase from "firebase";
 import searchMixins from '../mixins/searchMixins'
+import SingleClub from './SingleClub.vue'
 
 
 export default {
+  components:{
+    SingleClub
+  },
   data(){
     return{
       clubs: [],
-      search: ''
+      clubIds: [],
+      search: '',
     } 
   },
 
   created(){
-    var clubsArray = []
     firebase.firestore().collection('clubs')
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach(doc => {
-          console.log(doc.data())
-          clubsArray.push(doc.data());
+          this.clubs.push(doc.data());
+          this.clubIds.push(doc.id);
         })
-        this.clubs = clubsArray;
+        console.log(this.clubIds);
   }).catch(function(err) {
     console.log(err)
   })

@@ -1,29 +1,48 @@
 <template>
     <div id="single-club">
-        <h2> club id = {{id}}</h2>
+        <!-- <h1>This is a test: {{ clubIds }}</h1> -->
         <h1>Club: {{club.name}}</h1>
         <article>Location: {{club.location}}</article>
+
+        <div id="show-blogs">
+            <li>
+                <div v-for="post in posts" :key="post" class="single-blog"> 
+                    <h2>{{ post.title }}</h2>  
+                    <p>{{post.body}}</p>  
+                </div>
+            </li>
+        </div>
+
     </div>
+
 </template>
 
 <script>
+import firebase from "firebase";
+
+
 export default {
+    props: ['clubIds'],
     data () {
         return {
-            id: this.$route.params.id,
-            club: {}
+            posts: [],
         }
     },
-    // created() {
-    //     this.$http.get('https://clubhub-9bb7a.firebaseio.com/clubs/' + this.id + '.json').then(function(data){
-    //         return data.json();
-    //     }).then(function(data){
-    //         this.club = data
-    //     });
-    // },
-    created() {
-        this.id = this.$route.params.id;
-    }
+
+    created(){
+        firebase.firestore().collection('posts')
+            .get()
+            .then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                    this.posts.push(doc.data());
+                })
+            console.log(this.clubIds);
+            })
+            .catch(function(err) {
+                console.log(err)
+            })
+    },
+   
 }
 </script>
 
