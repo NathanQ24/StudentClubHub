@@ -1,46 +1,49 @@
 <template>
-<body>
-  <div id="header">
-    <h1>Student Club Hub</h1>
-  </div>
+  <body>
+    <div id="header">
+      <h1>Student Club Hub</h1>
+    </div>
 
-  <div id="welcome">
-    <p>Welcome to Student Club Hub, the place where you can connect with clubs at Walsh and the greater Canton Area!</p>
-  </div>
+    <div id="welcome">
+      <p>
+        Welcome to Student Club Hub, the place where you can connect with clubs
+        at Walsh and the greater Canton Area!
+      </p>
+    </div>
 
-  <div id="navbar">
-    <ul>
-      <li>
-        <router-link to="/">Home</router-link>
-      </li>
-      <li>
-        <router-link to="/club">Clubs</router-link>
-      </li>
-      <template v-if="user.loggedIn">
+    <div id="navbar">
+      <ul>
         <li>
-          <router-link to="/add-post">Posts</router-link>
+          <router-link to="/">Home</router-link>
         </li>
         <li>
-          <router-link to="/addClub">Create Club</router-link>
+          <router-link to="/club">Clubs</router-link>
         </li>
-        <li style="float:right">
-          <a class="nav-link" @click.prevent="signOut">Sign out</a>
-        </li>
-        <li style="float:right">
-          <a>Welcome, {{user.data.displayName}}</a>
-        </li>
-      </template>
-      <template v-else>
-        <li style="float:right">
-          <router-link to="/register">Register</router-link>
-        </li>
-        <li style="float:right">
-          <router-link to="/login">Login</router-link>
-        </li>
-      </template>
-    </ul>
-  </div>
-</body>
+        <template v-if="user.loggedIn">
+          <li>
+            <router-link to="/add-post">Posts</router-link>
+          </li>
+          <li>
+            <router-link to="/addClub">Create Club</router-link>
+          </li>
+          <li style="float:right">
+            <a class="nav-link" @click.prevent="signOut">Sign out</a>
+          </li>
+          <li style="float:right">
+            <a>Welcome, {{ user.data.displayName }}</a>
+          </li>
+        </template>
+        <template v-else>
+          <li style="float:right">
+            <router-link to="/register">Register</router-link>
+          </li>
+          <li style="float:right">
+            <router-link to="/login">Login</router-link>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </body>
 </template>
 
 <script>
@@ -50,21 +53,22 @@ export default {
   computed: {
     ...mapGetters({
       // map `this.user` to `this.$store.getters.user`
-      user: "user"
-    })
+      user: "user",
+    }),
   },
   methods: {
     signOut() {
+      console.log(this.user.data.uid);
       firebase
         .auth()
         .signOut()
         .then(() => {
           this.$router.replace({
-            name: "home"
+            name: "home",
           });
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

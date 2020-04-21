@@ -1,27 +1,33 @@
 <template>
-<body>
-  <div id="club-temp">
-    <input type="text" v-model="search" v-show="!selected" placeholder="Search Clubs" />
-    <div v-for="club in filteredClubs" v-bind:key="club">
-      <div v-show="!selected" class="single-club">
-        <a v-on:click="select(club.name)">
-          <h2>{{ club.name }}</h2>
-        </a>
-        <p>Location: {{club.location}}</p>
+  <body>
+    <div id="club-temp">
+      <input
+        type="text"
+        v-model="search"
+        v-show="!selected"
+        placeholder="Search Clubs"
+      />
+      <div v-for="club in filteredClubs" v-bind:key="club">
+        <div v-show="!selected" class="single-club">
+          <a v-on:click="select(club.name)">
+            <h2>{{ club.name }}</h2>
+          </a>
+          <p>Location: {{ club.location }}</p>
+        </div>
+      </div>
+      <div v-show="selected">
+        <div id="single-club">
+          <article v-on:click="back()">Back to Clubs</article>
+          <h1 id="clubName">club</h1>
+          <article id="clubAddress">address</article>
+          <article id="clubLocation">location</article>
+          <article id="clubDayTime">daytime</article>
+          <article id="clubBio">bio</article>
+          <article v-on:click="join()">Join Club</article>
+        </div>
       </div>
     </div>
-    <div v-show="selected">
-      <div id="single-club">
-        <article v-on:click="back()">Back to Clubs</article>
-        <h1 id="clubName">club</h1>
-        <article id="clubAddress">address</article>
-        <article id="clubLocation">location</article>
-        <article id="clubDayTime">daytime</article>
-        <article id="clubBio">bio</article>
-      </div>
-    </div>
-  </div>
-</body>
+  </body>
 </template>
 
 <script>
@@ -34,7 +40,8 @@ export default {
       clubIds: [],
       search: "",
       selected: false,
-      selectedId: ""
+      selectedId: "",
+      alreadyJoined: false,
     };
   },
   created() {
@@ -42,8 +49,8 @@ export default {
       .firestore()
       .collection("clubs")
       .get()
-      .then(snapshot => {
-        snapshot.docs.forEach(doc => {
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
           this.clubs.push(doc.data());
           this.clubIds.push(doc.id);
         });
@@ -58,7 +65,7 @@ export default {
     },
     select: function(name) {
       var ctr = 0;
-      this.clubs.forEach(club => {
+      this.clubs.forEach((club) => {
         if (club.name === name) {
           this.selected = true;
           document.getElementById("clubName").innerHTML = "" + club.name;
@@ -80,9 +87,40 @@ export default {
 
       // selectedId now holds key for club doc
       this.selectedId = this.clubIds[ctr];
-    }
+    },
+    join: function() {
+      firebase
+        .firestore()
+        .collection("clubsJoined")
+        .get()
+        .then((snapshot) => {
+          snapshot.docs.forEach((doc) => {
+            if (
+              doc.data().userID === firebase.auth().currentUser.uid &&
+              doc.data().clubID === this.selectedId
+            ) {
+              this.alreadyJoined = true;
+            }
+          });
+          if (this.alreadyJoined == false) {
+            firebase
+              .firestore()
+              .collection("clubsJoined")
+              .add({
+                accessLevel: 0,
+                clubID: this.selectedId,
+                userID: firebase.auth().currentUser.uid,
+              });
+          } else {
+            alert("You are already a member of this club.");
+          }
+        })
+        .catch((err) => {
+          alert("You must be logged in to join a club.");
+        });
+    },
   },
-  mixins: [searchMixins]
+  mixins: [searchMixins],
 };
 </script>
 
