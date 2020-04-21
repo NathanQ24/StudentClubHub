@@ -1,6 +1,4 @@
-
-  
-<template>
+  <template>
   <div id="add-blog">
     <h2>Add a New Blog Post</h2>
     <form v-if="!submited">
