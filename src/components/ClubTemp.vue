@@ -1,4 +1,4 @@
-<template>
+z<template>
   <body>
     <div id="club-temp">
       <input
@@ -15,16 +15,16 @@
           <p>Location: {{ club.location }}</p>
         </div>
       </div>
-<<<<<<< HEAD
     </div>
     <div v-show="selected">
       <div id="single-club">
-        <article v-on:click="back()">Back to Clubs</article>
+        <article id = "clickable" v-on:click="back()">Back to Clubs</article>
         <h1 id="clubName">club</h1>
         <article id="clubAddress">address</article>
         <article id="clubLocation">location</article>
         <article id="clubDayTime">daytime</article>
         <article id="clubBio">bio</article>
+        <article id = "clickable" v-on:click="join()">Join Club</article>
 
       <div v-if="submitted == true">
             <h3>Thanks for adding a post</h3>
@@ -48,6 +48,8 @@
             <p>Blog content:</p>
             <p>{{ blog.content }}</p>
         </div>
+
+        
       </div>
 
         <button @click.once="filt">View this Clubs Posts</button>
@@ -57,18 +59,6 @@
                     <p>{{post.body}}</p>  
                 </div>
             </li>
-=======
-      <div v-show="selected">
-        <div id="single-club">
-          <article v-on:click="back()">Back to Clubs</article>
-          <h1 id="clubName">club</h1>
-          <article id="clubAddress">address</article>
-          <article id="clubLocation">location</article>
-          <article id="clubDayTime">daytime</article>
-          <article id="clubBio">bio</article>
-          <article v-on:click="join()">Join Club</article>
-        </div>
->>>>>>> 58af6489274573bfb7bd1feb9dbc2cd6638ea719
       </div>
     </div>
   </body>
@@ -85,7 +75,6 @@ export default {
       search: "",
       selected: false,
       selectedId: "",
-<<<<<<< HEAD
       posts: [],
       postsF: [],
       blog: {
@@ -94,9 +83,6 @@ export default {
                 categories: []
             },
         submitted: false,
-=======
-      alreadyJoined: false,
->>>>>>> 58af6489274573bfb7bd1feb9dbc2cd6638ea719
     };
   },
   created() {
@@ -146,7 +132,6 @@ export default {
       // selectedId now holds key for club doc
       this.selectedId = this.clubIds[ctr];
     },
-<<<<<<< HEAD
     filt() {
       this.posts.forEach(post => {
         if (post.clubID === this.selectedId) {
@@ -189,14 +174,13 @@ mounted() {
 
   },
 
-=======
-    join: function() {
+  join: function() {
       firebase
         .firestore()
         .collection("clubsJoined")
         .get()
-        .then((snapshot) => {
-          snapshot.docs.forEach((doc) => {
+        .then(snapshot => {
+          snapshot.docs.forEach(doc => {
             if (
               doc.data().userID === firebase.auth().currentUser.uid &&
               doc.data().clubID === this.selectedId
@@ -211,19 +195,17 @@ mounted() {
               .add({
                 accessLevel: 0,
                 clubID: this.selectedId,
-                userID: firebase.auth().currentUser.uid,
+                userID: firebase.auth().currentUser.uid
               });
           } else {
             alert("You are already a member of this club.");
           }
         })
-        .catch((err) => {
+        .catch(err => {
           alert("You must be logged in to join a club.");
         });
-    },
-  },
-  mixins: [searchMixins],
->>>>>>> 58af6489274573bfb7bd1feb9dbc2cd6638ea719
+    }
+
 };
 </script>
 
@@ -261,6 +243,12 @@ mounted() {
   margin-bottom: 3%;
   margin-left: 1%;
 }
+
+#clickable:hover{
+  background: maroon;
+  color: gold;
+}
+
 .card {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
